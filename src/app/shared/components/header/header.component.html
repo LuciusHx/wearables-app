@@ -4,9 +4,12 @@
       <ion-back-button [defaultHref]="backButton"></ion-back-button>
     </ion-buttons>
 
-    <ion-title *ngIf="title" [ngClass]="{ 'ion-text-center': centerTitle }">{{
-      title
-    }}</ion-title>
+    <ion-title
+      *ngIf="title"
+      [ngClass]="{ 'ion-text-center': centerTitle }"
+      [ngStyle]="{ padding: backButton ? 0 : '' }"
+      >{{ title }}</ion-title
+    >
 
     <ion-buttons slot="end">
       <ion-button (click)="toggleTheme()">

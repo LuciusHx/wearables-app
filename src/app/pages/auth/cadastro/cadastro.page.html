@@ -1,0 +1,91 @@
+<ion-content [fullscreen]="true">
+  <app-header backButton="/" [title]="'Cadastro'"></app-header>
+
+  <div class="content">
+    <div class="d-flex-center">
+      <form (keyup.enter)="submit()" (ngSubmit)="submit()">
+        <!-- ============ NOME ============= -->
+        <app-custom-input
+          autocomplete="name"
+          [control]="form.controls.name"
+          type="text"
+          icon="person-outline"
+        ></app-custom-input>
+        <ion-text
+          color="danger"
+          *ngIf="form.get('name')?.hasError('required') && form.get('name')?.touched"
+        >
+          Esse campo é obrigatório!
+        </ion-text>
+        <ion-text
+          color="danger"
+          *ngIf="form.get('name')?.hasError('minlength') && form.get('name')?.touched"
+        >
+          Insira um nome válido!
+        </ion-text>
+
+        <!-- ======= EMAIL ========== -->
+        <app-custom-input
+          autocomplete="email"
+          [control]="form.controls.email"
+          type="email"
+          icon="mail-outline"
+        ></app-custom-input>
+        <ion-text
+          color="danger"
+          *ngIf="form.get('email')?.hasError('required') && form.get('email')?.touched"
+        >
+          Esse campo é obrigatório!
+        </ion-text>
+        <ion-text
+          color="danger"
+          *ngIf="form.get('email')?.hasError('email') && form.get('email')?.touched"
+        >
+          Insira um Email válido!
+        </ion-text>
+
+        <!-- ============ SENHA =========== -->
+        <app-custom-input
+          [control]="form.controls.password"
+          type="password"
+          icon="lock-closed-outline"
+        ></app-custom-input>
+        <ion-text
+          color="danger"
+          *ngIf="form.get('password')?.hasError('required') && form.get('password')?.touched"
+        >
+          Esse campo é obrigatório!
+        </ion-text>
+        <ion-text
+          color="danger"
+          *ngIf="form.get('password')?.hasError('minlength') && form.get('password')?.touched"
+        >
+          A senha deve ter pelo menos 8 caracteres
+        </ion-text>
+
+        <!-- ============ CONFIRMAR SENHA =========== -->
+        <app-custom-input
+          [control]="form.controls.confirmPassword"
+          type="password"
+          icon="checkmark-circle-outline"
+        ></app-custom-input>
+        <ion-text
+          color="danger"
+          *ngIf="form.get('confirmPassword')?.hasError('noMatch') && form.get('confirmPassword')?.touched"
+        >
+          As senhas não são iguais.
+        </ion-text>
+
+        <!-- =========== BOTAO ============ -->
+        <ion-button
+          [disabled]="form.invalid"
+          (click)="submit()"
+          expand="block"
+          class="botao"
+        >
+          Cadastrar
+        </ion-button>
+      </form>
+    </div>
+  </div>
+</ion-content>

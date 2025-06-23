@@ -5,6 +5,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 import { SharedModule } from 'src/app/shared/shared.module';
 
@@ -13,7 +14,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
   templateUrl: './auth.page.html',
   styleUrls: ['./auth.page.scss'],
   standalone: true,
-  imports: [SharedModule, ReactiveFormsModule],
+  imports: [SharedModule, ReactiveFormsModule, RouterLink],
 })
 export class AuthPage implements OnInit {
   form = new FormGroup({
