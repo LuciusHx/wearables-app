@@ -1,0 +1,7 @@
+{
+  "name": "wearables-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
