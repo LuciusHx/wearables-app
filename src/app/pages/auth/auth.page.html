@@ -1,0 +1,53 @@
+<app-header color="primary" title="Login"></app-header>
+
+<ion-content>
+  <div class="container">
+    <div class="d-flex-center">
+      <form [formGroup]="form">
+        <!-- ======== EMAIL ========= -->
+        <app-custom-input
+          autocomplete="email"
+          [control]="form.controls.email"
+          type="email"
+          icon="mail-outline"
+        ></app-custom-input>
+        <ion-text
+          color="danger"
+          *ngIf="form.get('email')?.hasError('email') && form.get('email')?.touched"
+          >Insira um email válido!</ion-text
+        >
+        <ion-text
+          color="danger"
+          *ngIf="form.get('email')?.hasError('required') && form.get('email')?.touched"
+          >Esse campo é obrigatório!</ion-text
+        >
+
+        <!-- ======= SENHA ====== -->
+        <app-custom-input
+          type="password"
+          [control]="form.controls.password"
+          icon="lock-closed-outline"
+        ></app-custom-input>
+        <ion-text
+          color="danger"
+          *ngIf="form.get('password')?.hasError('required') &&
+            form.get('password')?.touched"
+        >
+          Esse campo é obrigatório!
+        </ion-text>
+        <ion-text
+          color="danger"
+          *ngIf="form.get('password')?.hasError('minlength') &&
+        form.get('password')?.touched"
+        >
+          A senha deve ter pelo menos 8 caracteres
+        </ion-text>
+
+        <!-- ========== BUTTON ========= -->
+        <ion-button (click)="submit()" [disabled]="form.invalid" expand="block" shape="round">
+          ENTRAR
+        </ion-button>
+      </form>
+    </div>
+  </div>
+</ion-content>
