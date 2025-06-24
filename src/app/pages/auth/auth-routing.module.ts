@@ -6,12 +6,8 @@ import { AuthPage } from './auth.page';
 const routes: Routes = [
   {
     path: '',
-    component: AuthPage
-  },  {
-    path: 'cadastro',
-    loadChildren: () => import('./cadastro/cadastro.module').then( m => m.CadastroPageModule)
-  }
-
+    component: AuthPage,
+  },
 ];
 
 @NgModule({

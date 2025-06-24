@@ -5,7 +5,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { UtilsService } from 'src/app/services/utils.service';
 
 import { SharedModule } from 'src/app/shared/shared.module';
 
@@ -14,7 +14,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
   templateUrl: './auth.page.html',
   styleUrls: ['./auth.page.scss'],
   standalone: true,
-  imports: [SharedModule, ReactiveFormsModule, RouterLink],
+  imports: [SharedModule, ReactiveFormsModule],
 })
 export class AuthPage implements OnInit {
   form = new FormGroup({
@@ -25,14 +25,15 @@ export class AuthPage implements OnInit {
     ]),
   });
 
-  constructor() {}
+  constructor(private utilsService: UtilsService) {}
 
   ngOnInit() {}
 
-  submit(){
-    if(this.form.valid){
-      console.log(this.form.value)
-      this.form.reset()
+  submit() {
+    if (this.form.valid) {
+      console.log(this.form.value);
+      this.form.reset();
+      this.utilsService.routerLink('/tabs/home')
     }
   }
 }
