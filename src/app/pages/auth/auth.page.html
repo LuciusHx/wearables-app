@@ -3,24 +3,24 @@
 <ion-content>
   <div class="container">
     <div class="d-flex-center">
-      <form [formGroup]="form">
+      <form [formGroup]="form" (ngSubmit)="submit()" (keyup.enter)="submit()">
         <!-- ======== EMAIL ========= -->
         <app-custom-input
           autocomplete="email"
           [control]="form.controls.email"
-          type="email"
+          type="email"  
           icon="mail-outline"
         ></app-custom-input>
-        <ion-text
-          color="danger"
-          *ngIf="form.get('email')?.hasError('email') && form.get('email')?.touched"
-          >Insira um email válido!</ion-text
-        >
-        <ion-text
-          color="danger"
-          *ngIf="form.get('email')?.hasError('required') && form.get('email')?.touched"
-          >Esse campo é obrigatório!</ion-text
-        >
+        <div *ngIf="form.controls.email.errors && form.controls.email.touched">
+          <ion-text color="danger" *ngIf="form.get('email')?.hasError('email')"
+            >Insira um email válido!</ion-text
+          >
+          <ion-text
+            color="danger"
+            *ngIf="form.controls.email.errors?.['required']"
+            >Esse campo é obrigatório!</ion-text
+          >
+        </div>
 
         <!-- ======= SENHA ====== -->
         <app-custom-input
@@ -28,20 +28,22 @@
           [control]="form.controls.password"
           icon="lock-closed-outline"
         ></app-custom-input>
-        <ion-text
-          color="danger"
-          *ngIf="form.get('password')?.hasError('required') &&
-            form.get('password')?.touched"
+        <div
+          *ngIf="form.controls.password.errors && form.controls.password.touched"
         >
-          Esse campo é obrigatório!
-        </ion-text>
-        <ion-text
-          color="danger"
-          *ngIf="form.get('password')?.hasError('minlength') &&
-        form.get('password')?.touched"
-        >
-          A senha deve ter pelo menos 8 caracteres
-        </ion-text>
+          <ion-text
+            color="danger"
+            *ngIf="form.controls.password.errors?.['required']"
+          >
+            Esse campo é obrigatório!
+          </ion-text>
+          <ion-text
+            color="danger"
+            *ngIf="form.controls.password.errors?.['minlength']"
+          >
+            A senha deve ter pelo menos 8 caracteres
+          </ion-text>
+        </div>
 
         <!-- ========== BUTTON ========= -->
         <ion-button
