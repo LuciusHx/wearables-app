@@ -1,8 +1,8 @@
 export interface Product {
   name: string;
-  price: string; 
+  price: string;
   stock: number;
   sizes: string[];
   seller: string;
+  category: string;
 }
-

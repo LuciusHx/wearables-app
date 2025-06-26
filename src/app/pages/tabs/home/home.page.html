@@ -1,32 +1,39 @@
 <ion-content [fullscreen]="true">
   <app-header title="Catálogo"></app-header>
 
-  <ion-card>
-    <ion-grid fixed>
-      <ion-row>
-        <ion-col size="4">
-          <ion-searchbar
-            mode="ios"
-            type="text"
-            autocorrect="on"
-            placeholder="Pesquisar"
-            [debounce]="250"
-          ></ion-searchbar>
-        </ion-col>
-        <ion-col size="4">
-          <ion-select mode="md" shape="round" fill="outline" [value]="parts[0]">
-            <ion-select-option *ngFor="let part of parts"
-              >{{part}}</ion-select-option
-            >
-          </ion-select></ion-col
-        >
-        <ion-col size="4">
-          <ion-button expand="block" shape="round">
-            <ion-icon name="search-outline"></ion-icon>
-            Buscar
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-card>
+  <app-search-filter
+    (searchChange)="handleSearch($event)"
+    (categoryChange)="handleCategoryChange($event)"
+    (filterApply)="applyFilters()"
+  ></app-search-filter>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col
+        *ngFor="let product of filteredProducts"
+        sizeLg="4"
+        sizeMd="6"
+        sizeSm="12"
+        size="12"
+      >
+        <ion-card>
+          <img
+            alt="Silhouette of mountains"
+            src="https://ionicframework.com/docs/img/demos/card-media.png"
+          />
+          <ion-card-header>
+            <ion-card-title>{{product.name}}</ion-card-title>
+            <ion-card-subtitle>{{product.price}}</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-label>{{product.sizes}} </ion-label>
+            <ion-label> | {{product.stock}} </ion-label>
+            <ion-label> | {{product.seller}} </ion-label>
+            <ion-label> | {{product.category}} </ion-label>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

@@ -33,7 +33,7 @@
  */
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+// @import "@ionic/angular/css/palettes/dark.class.css";
 // @import "@ionic/angular/css/palettes/dark.system.css";
 
 ion-item {
@@ -44,4 +44,10 @@ ion-item {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.dark {
+  ion-card-title {   
+    color: var(--ion-color-dark-contrast);
+  }
 }

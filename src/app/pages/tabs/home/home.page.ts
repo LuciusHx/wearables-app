@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product.models';
+import { SearchFilterComponent } from 'src/app/shared/components/search-filter/search-filter.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
@@ -7,11 +8,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule, SearchFilterComponent],
 })
 export class HomePage implements OnInit {
-  parts = ['Todas as peças', 'Shorts', 'Camisetas', 'Calças', 'Sapatos'];
-
   products: Product[] = [
     {
       name: 'Jaqueta Puma',
@@ -19,6 +18,7 @@ export class HomePage implements OnInit {
       stock: 3,
       sizes: ['P', 'M', 'G'],
       seller: 'Lucius',
+      category: 'Camisetas',
     },
     {
       name: 'Camisa Nike',
@@ -26,6 +26,7 @@ export class HomePage implements OnInit {
       stock: 2,
       sizes: ['P', 'M', 'G'],
       seller: 'Luan',
+      category: 'Calças',
     },
     {
       name: 'Bermuda Adidas',
@@ -33,10 +34,51 @@ export class HomePage implements OnInit {
       stock: 2,
       sizes: ['P', 'M', 'G'],
       seller: 'Lucius',
+      category: 'Camisetas',
+    },
+    {
+      name: 'Bermuda Adidas',
+      price: 'R$1.000,00',
+      stock: 2,
+      sizes: ['P', 'M', 'G'],
+      seller: 'Lucius',
+      category: 'Acessórios',
     },
   ];
 
+  // ========= filtro =========
+  filteredProducts = [...this.products];
+  searchTerm = '';
+  selectedCategories: string[] = [];
+
+  handleSearch(term: string) {
+    this.searchTerm = term.toLowerCase();
+    this.applyFilters();
+  }
+
+  handleCategoryChange(categories: string[]) {
+    this.selectedCategories = categories;
+    this.applyFilters();
+  }
+
+  applyFilters() {
+    this.filteredProducts = this.products.filter((product) => {
+      const matchesSearch =
+        !this.searchTerm ||
+        product.name.toLowerCase().includes(this.searchTerm) ||
+        product.seller.toLowerCase().includes(this.searchTerm) ||
+        product.category.toLowerCase().includes(this.searchTerm);
+
+      const matchesCategory =
+        this.selectedCategories.length === 0 ||
+        this.selectedCategories.includes(product.category);
+
+      return matchesSearch && matchesCategory;
+    });
+  }
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.applyFilters();
+  }
 }

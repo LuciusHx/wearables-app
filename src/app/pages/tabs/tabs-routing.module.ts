@@ -8,11 +8,17 @@ const routes: Routes = [
     path: '',
     component: TabsPage,
     children: [
-        {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  }
-    ]
+      {
+        path: 'home',
+        loadChildren: () =>
+          import('./home/home.module').then((m) => m.HomePageModule),
+      },
+      {
+        path: 'admin',
+        loadChildren: () =>
+          import('./admin/admin.module').then((m) => m.AdminPageModule),
+      },
+    ],
   },
 ];
 
