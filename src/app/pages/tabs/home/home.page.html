@@ -1,0 +1,39 @@
+<ion-content [fullscreen]="true">
+  <app-header title="Catálogo"></app-header>
+
+  <app-search-filter
+    (searchChange)="handleSearch($event)"
+    (categoryChange)="handleCategoryChange($event)"
+    (filterApply)="applyFilters()"
+  ></app-search-filter>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col
+        *ngFor="let product of filteredProducts"
+        sizeLg="4"
+        sizeMd="6"
+        sizeSm="12"
+        size="12"
+      >
+        <ion-card>
+          <img
+            alt="Silhouette of mountains"
+            src="https://ionicframework.com/docs/img/demos/card-media.png"
+          />
+          <ion-card-header>
+            <ion-card-title>{{product.name}}</ion-card-title>
+            <ion-card-subtitle>{{product.price}}</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-label>{{product.sizes}} </ion-label>
+            <ion-label> | {{product.stock}} </ion-label>
+            <ion-label> | {{product.seller}} </ion-label>
+            <ion-label> | {{product.category}} </ion-label>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,21 @@
+<ion-item *ngIf="type !== 'textarea'" class="ion-margin-vertical">
+  <ion-icon
+    *ngIf="icon"
+    [name]="icon"
+    class="ion-padding-end"
+    color="primary"
+  ></ion-icon>
+  <div class="content-form">
+    <ion-input
+      [formControl]="control"
+      [autocomplete]="autocomplete"
+      [type]="type"
+      [label]="label"
+    >
+      <ion-input-password-toggle
+        *ngIf="isPassword"
+        slot="end"
+      ></ion-input-password-toggle>
+    </ion-input>
+  </div>
+</ion-item>

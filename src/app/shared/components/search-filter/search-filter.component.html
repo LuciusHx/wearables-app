@@ -1,0 +1,40 @@
+<ion-card class="ion-padding">
+  <div class="d-flex-center">
+    <ion-searchbar
+      placeholder="Pesquisar"
+      [debounce]="250"
+      (ionInput)="onSearchChange($event)"
+      [value]="searchTerm"
+      show-clear-button="focus"
+    ></ion-searchbar>
+
+    <ion-select
+      label="Filtrar"
+      shape="round"
+      fill="outline"
+      [multiple]="true"
+      (ionChange)="onCategoryChange($event)"
+      [value]="selectedCategories"
+    >
+      <ion-select-option *ngFor="let category of categories" [value]="category">
+        {{ category }}
+      </ion-select-option>
+    </ion-select>
+  </div>
+
+  <ion-button expand="block" shape="round" (click)="onFilterApply()">
+    <ion-icon name="search-outline"></ion-icon>
+    Buscar
+  </ion-button>
+</ion-card>
+
+<div class="removeFilter d-flex-center">
+  <ion-button
+    *ngIf="showResetButton"
+    (click)="resetFilters()"
+    fill="clear"
+    shape="round"
+  >
+    Remover Filtros
+  </ion-button>
+</div>
